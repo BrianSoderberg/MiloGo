@@ -112,10 +112,13 @@
 
       var script = document.createElement("script");
       script.src = loaderUrl;
+      var unityInstance = null;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
-              }).then((unityInstance) => {
+              }).then((unityInst) => {
+                unityInstance = unityInst;
+                window.unityInstance = unityInstance;
                 document.querySelector("#unity-loading-bar").style.display = "none";
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                   unityInstance.SetFullscreen(1);
